@@ -1,0 +1,33 @@
+@import "@react-aria/example-theme/src/index.css";
+
+.react-aria-Menu {
+  max-height: inherit;
+  box-sizing: border-box;
+  overflow: auto;
+  padding: 2px;
+  min-width: 150px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.react-aria-MenuItem {
+  margin: 2px;
+  padding: 0.286rem 0.571rem;
+  border-radius: 6px;
+  outline: none;
+  cursor: default;
+  color: var(--text-color);
+  font-size: 1.072rem;
+  position: relative;
+  display: grid;
+  grid-template-areas: "label kbd"
+                      "desc  kbd";
+  align-items: center;
+  column-gap: 20px;
+  forced-color-adjust: none;
+
+  &[data-focused] {
+    background: var(--highlight-background);
+    color: var(--highlight-foreground);
+  }
+}
