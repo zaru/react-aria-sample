@@ -10,9 +10,13 @@ import {
   TableHeader,
 } from "../Aria/Table.tsx";
 import { CommandPopover } from "./CommandPopover.tsx";
-import { tableData } from "./tableData.ts";
+import type { TableData } from "./tableData.ts";
 
-export function ComplexTable() {
+interface Props {
+  tableData: TableData;
+}
+
+export function ComplexTable(props: Props) {
   const [openCommandPopover, setOpenCommandPopover] = useState(false);
   const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set());
 
@@ -51,7 +55,7 @@ export function ComplexTable() {
           <Column>Created At</Column>
         </TableHeader>
         <TableBody>
-          {tableData.map((row) => (
+          {props.tableData.map((row) => (
             <Row key={row.id} id={row.id}>
               <Cell>
                 <Checkbox slot="selection" name="id">

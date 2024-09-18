@@ -1,22 +1,25 @@
-import { useState } from "react";
-import { Heading } from "react-aria-components";
+import { Heading, type Selection } from "react-aria-components";
 import { Button } from "../Aria/Button.tsx";
 import { Dialog } from "../Aria/Dialog.tsx";
 import { Form } from "../Aria/Form.tsx";
 import { Modal } from "../Aria/Modal.tsx";
-import { TextField } from "../Aria/TextField.tsx";
+import { EditComplexTable } from "./EditComplexTable.tsx";
+import { tableData } from "./tableData.ts";
 
 interface Props {
   openModal: boolean;
+  selected: Selection;
   setOpenModal: (open: boolean) => void;
 }
 
-export function EditFormModal(props: Props) {
-  // MEMO: エラーメッセージをカスタマイズする方法のデモ
-  const [errors, setErrors] = useState({
-    email: "This email is already taken",
-  });
+function selectedData(selected: Selection) {
+  if (selected === "all") {
+    return tableData;
+  }
+  return tableData.filter((row) => selected.has(row.id));
+}
 
+export function EditFormModal(props: Props) {
   return (
     <Modal
       isOpen={props.openModal}
@@ -25,13 +28,21 @@ export function EditFormModal(props: Props) {
     >
       <Dialog>
         {({ close }) => (
-          <Form validationErrors={errors}>
+          <Form className="h-full" method="get">
             <Heading slot="title">Edit</Heading>
-            <TextField autoFocus name="name" label="Name" />
-            <TextField name="email" label="Email" />
-            <Button variant="primary" onPress={close}>
-              Submit
-            </Button>
+            <div className="flex-1 overflow-auto">
+              <div className="h-full">
+                <EditComplexTable tableData={selectedData(props.selected)} />
+              </div>
+            </div>
+            <div className="flex justify-end gap-4">
+              <Button variant="secondary" onPress={close}>
+                Close
+              </Button>
+              <Button type="submit" variant="primary">
+                Update
+              </Button>
+            </div>
           </Form>
         )}
       </Dialog>

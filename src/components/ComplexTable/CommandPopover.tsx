@@ -40,7 +40,11 @@ export function CommandPopover(props: Props) {
             Edit
           </Button>
         </Heading>
-        <EditFormModal openModal={openModal} setOpenModal={setOpenModal} />
+        <EditFormModal
+          selected={props.selected}
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+        />
       </Dialog>
     </Popover>
   );
