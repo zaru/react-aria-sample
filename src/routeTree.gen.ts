@@ -16,10 +16,16 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
+const ToastLazyImport = createFileRoute('/toast')()
 const TableLazyImport = createFileRoute('/table')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
+
+const ToastLazyRoute = ToastLazyImport.update({
+  path: '/toast',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/toast.lazy').then((d) => d.Route))
 
 const TableLazyRoute = TableLazyImport.update({
   path: '/table',
@@ -49,6 +55,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TableLazyImport
       parentRoute: typeof rootRoute
     }
+    '/toast': {
+      id: '/toast'
+      path: '/toast'
+      fullPath: '/toast'
+      preLoaderRoute: typeof ToastLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -57,36 +70,41 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/table': typeof TableLazyRoute
+  '/toast': typeof ToastLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/table': typeof TableLazyRoute
+  '/toast': typeof ToastLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
   '/table': typeof TableLazyRoute
+  '/toast': typeof ToastLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/table'
+  fullPaths: '/' | '/table' | '/toast'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/table'
-  id: '__root__' | '/' | '/table'
+  to: '/' | '/table' | '/toast'
+  id: '__root__' | '/' | '/table' | '/toast'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   TableLazyRoute: typeof TableLazyRoute
+  ToastLazyRoute: typeof ToastLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   TableLazyRoute: TableLazyRoute,
+  ToastLazyRoute: ToastLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -102,7 +120,8 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/table"
+        "/table",
+        "/toast"
       ]
     },
     "/": {
@@ -110,6 +129,9 @@ export const routeTree = rootRoute
     },
     "/table": {
       "filePath": "table.lazy.tsx"
+    },
+    "/toast": {
+      "filePath": "toast.lazy.tsx"
     }
   }
 }

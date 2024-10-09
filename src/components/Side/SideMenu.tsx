@@ -18,6 +18,14 @@ export function SideMenu() {
             テーブルDemo
           </a>
         </li>
+        <li>
+          <a
+            href="/toast"
+            className="flex gap-x-3 rounded-md bg-white p-2 pl-3 font-semibold text-gray-700 text-sm leading-6 hover:bg-gray-50 hover:text-indigo-600"
+          >
+            Toast Demo
+          </a>
+        </li>
         {[...Array(100)].map((_, i) => (
           // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
           <li key={i}>

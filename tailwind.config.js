@@ -7,6 +7,7 @@ export default {
     extend: {},
   },
   plugins: [
+    plugin,
     require("tailwindcss-react-aria-components"),
     require("tailwindcss-animate"),
   ],
