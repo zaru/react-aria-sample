@@ -10,7 +10,7 @@ import {
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
 import { Button } from "./Button.tsx";
-import { FieldError } from "./Field";
+import { Description, FieldError, Label } from "./Field";
 import { DropdownItem, ListBox } from "./ListBox";
 import { Popover } from "./Popover";
 import { composeTailwindRenderProps, focusRing } from "./utils";
@@ -52,6 +52,7 @@ export function Select<T extends object>({
         "group flex flex-col gap-1",
       )}
     >
+      {label && <Label>{label}</Label>}
       <Button className={styles}>
         <SelectValue className="flex-1 text-sm placeholder-shown:italic" />
         <ChevronDown
@@ -59,6 +60,7 @@ export function Select<T extends object>({
           className="h-4 w-4 text-gray-600 group-disabled:text-gray-200 forced-colors:text-[ButtonText] forced-colors:group-disabled:text-[GrayText]"
         />
       </Button>
+      {description && <Description>{description}</Description>}
       <FieldError>{errorMessage}</FieldError>
       <Popover className="min-w-[--trigger-width]">
         <ListBox

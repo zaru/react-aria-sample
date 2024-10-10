@@ -15,10 +15,30 @@
           "level": "error",
           "fix": "safe",
           "options": {}
+        },
+        "noRestrictedImports": {
+          "level": "error",
+          "options": {
+            "paths": {
+              "react-aria-components": "Use import react-aria-components from \"/components/Aria\";"
+            }
+          }
         }
       }
     }
   },
+  "overrides": [
+    {
+      "include": ["src/components/Aria/**"],
+      "linter": {
+        "rules": {
+          "nursery": {
+            "noRestrictedImports": "off"
+          }
+        }
+      }
+    }
+  ],
   "formatter": {
     "indentStyle": "space"
   }
