@@ -1,4 +1,6 @@
 import type { Config } from "tailwindcss";
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const plugin = require("tailwindcss/plugin");
 
 const config: Config = {
   content: [
@@ -14,6 +16,12 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin,
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    require("tailwindcss-react-aria-components"),
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    require("tailwindcss-animate"),
+  ],
 };
 export default config;
