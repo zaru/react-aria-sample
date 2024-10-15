@@ -36,6 +36,14 @@ export function SideMenu() {
         </li>
         <li>
           <a
+            href="/combo-box"
+            className="flex gap-x-3 rounded-md bg-white p-2 pl-3 font-semibold text-gray-700 text-sm leading-6 hover:bg-gray-50 hover:text-indigo-600"
+          >
+            ComboBox・インクリメンタルサーチ
+          </a>
+        </li>
+        <li>
+          <a
             href="/modal/parallel"
             className="flex gap-x-3 rounded-md bg-white p-2 pl-3 font-semibold text-gray-700 text-sm leading-6 hover:bg-gray-50 hover:text-indigo-600"
           >
