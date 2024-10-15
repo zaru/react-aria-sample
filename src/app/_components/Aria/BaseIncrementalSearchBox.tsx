@@ -1,3 +1,4 @@
+import { dropdownItemStyles } from "@/app/_components/Aria/ListBox";
 import type React from "react";
 import {
   ComboBox as AriaComboBox,
@@ -15,6 +16,7 @@ export interface BaseIncrementalSearchBoxProps<T extends object>
   description?: string | null;
   errorMessage?: string | ((validation: ValidationResult) => string);
   children: React.ReactNode | ((item: T) => React.ReactNode);
+  popoverOpen: boolean;
 }
 
 export function BaseIncrementalSearchBox<T extends object>({
@@ -23,6 +25,7 @@ export function BaseIncrementalSearchBox<T extends object>({
   errorMessage,
   children,
   items,
+  popoverOpen,
   ...props
 }: BaseIncrementalSearchBoxProps<T>) {
   return (
@@ -39,10 +42,13 @@ export function BaseIncrementalSearchBox<T extends object>({
       </FieldGroup>
       {description && <Description>{description}</Description>}
       <FieldError>{errorMessage}</FieldError>
-      <Popover className="w-[--trigger-width]">
+      <Popover className="w-[--trigger-width]" isOpen={popoverOpen}>
         <ListBox
           items={items}
           className="max-h-[inherit] overflow-auto p-1 outline-0 [clip-path:inset(0_0_0_0_round_.75rem)]"
+          renderEmptyState={() => (
+            <span className={dropdownItemStyles()}>見つかりませんでした</span>
+          )}
         >
           {children}
         </ListBox>

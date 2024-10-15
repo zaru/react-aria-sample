@@ -20,11 +20,10 @@ export function IncrementalSearchBox({ list, handleSelectionChange }: Props) {
       onSelectionChange={handleSelectionChange}
       inputValue={list.filterText}
       onInputChange={list.setFilterText}
-      defaultFilter={() => true}
       shouldFocusWrap={true}
       allowsEmptyCollection={true}
       isRequired={true}
-      allowsCustomValue={true}
+      popoverOpen={list.filterText !== ""}
     >
       {(item) => (
         <DropdownItem isDisabled={item.id === 0}>{item.name}</DropdownItem>

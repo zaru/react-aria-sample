@@ -10,12 +10,12 @@ import type { Key } from "react-aria-components";
 export function CompanySearchBox() {
   const list = useAsyncList<SearchOptionType>({
     async load({ filterText }) {
+      if (!filterText) {
+        return { items: [] };
+      }
       const items = await searchOptions(filterText);
       if (items.length === 0) {
-        const emptyItems: SearchOptionType[] = [
-          { id: 0, name: "見つかりませんでした" },
-        ];
-        return { items: emptyItems };
+        return { items: [] };
       }
       return {
         items,
