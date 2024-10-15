@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { GlobalToastRegion } from "@/app/_components/Aria/Toast/GlobalToastRegion";
+import { AppLayout } from "@/app/_components/Layout/AppLayout";
+import { SideMenu } from "@/app/_components/Side/SideMenu";
+import { SideProfileMenu } from "@/app/_components/Side/SideProfileMenu";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,7 +18,16 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body>
-        {children}
+        <AppLayout>
+          <AppLayout.Header />
+          <AppLayout.Body>
+            <AppLayout.Side>
+              <SideMenu />
+              <SideProfileMenu />
+            </AppLayout.Side>
+            {children}
+          </AppLayout.Body>
+        </AppLayout>
         <GlobalToastRegion />
       </body>
     </html>
